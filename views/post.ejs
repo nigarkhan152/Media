@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Tech Blog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-white border-b shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+      <div class="flex justify-between h-16 items-center">
+        <!-- Left side -->
+        <div class="flex items-center space-x-8 text-[15px] font-medium text-gray-700">
+          <a href="/" class="flex items-center hover:text-blue-600 transition">
+            <i class="fas fa-home mr-2"></i> Home
+          </a>
+          <div class="relative group">
+            <button class="flex items-center hover:text-blue-600 transition">
+              Categories <i class="fas fa-chevron-down ml-2 text-xs"></i>
+            </button>
+            <div class="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg hidden group-hover:block">
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Science</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Health & Care</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Astronomy</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">IT</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Maths</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">History</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Politics</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right side -->
+        <div class="flex space-x-4 text-[15px] font-medium">
+        <a href="/logout" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-300 hover:text-black transition">
+            Logout
+          </a>
+        <a href="/profile" class="px-4 py-2 bg-black text-white rounded-lg hover:bg-zinc-300 hover:text-black transition">
+            Profile
+        </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="max-w-4xl mx-auto p-6 bg-white rounded-2xl shadow-lg mt-10">
+  <!-- Heading -->
+  <h2 class="text-2xl font-bold text-gray-800 mb-6">Create New Blog Post</h2>
+
+  <form action="/post" method="POST" enctype="multipart/form-data" class="space-y-6">
+
+    <!-- Title -->
+    <div>
+      <label for="title" class="block text-sm font-medium text-gray-700">Heading</label>
+      <input type="text" id="title" name="title" 
+        class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm p-2" 
+        placeholder="Enter blog heading" required>
+    </div>
+
+    <!-- Content 1 -->
+    <div>
+      <label for="content1" class="block text-sm font-medium text-gray-700">Content 1</label>
+      <textarea id="content1" name="content1" rows="4" 
+        class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm p-2"
+        placeholder="Write the first part of your blog..." required></textarea>
+    </div>
+
+    <!-- Content 2 -->
+    <div>
+      <label for="content2" class="block text-sm font-medium text-gray-700">Content 2</label>
+      <textarea id="content2" name="content2" rows="4" 
+        class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm p-2"
+        placeholder="Write the second part of your blog..."></textarea>
+    </div>
+
+    <!-- Picture 1 -->
+    <div>
+      <label for="picture1" class="block text-sm font-medium text-gray-700">Picture 1</label>
+      <input type="file" id="picture1" name="pic1"
+        class="mt-1 block w-1/5 text-sm text-gray-500 border border-gray-300  cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-black focus:border-black">
+    </div>
+
+    <!-- Picture 2 -->
+    <div>
+      <label for="picture2" class="block text-sm font-medium text-gray-700">Picture 2</label>
+      <input type="file" id="picture2" name="pic2"
+        class="mt-1 block w-1/5 text-sm text-gray-500 border border-gray-300  cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-black focus:border-black">
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-end space-x-4">
+      <button type="submit" class="px-6 py-2 bg-black text-white font-medium rounded-xl shadow hover:bg-zinc-300 hover:text-black transition">
+        Post Blog
+      </button>
+            <button type="submit" class="px-6 py-2 bg-red-500 text-white font-medium rounded-xl shadow hover:bg-zinc-300 hover:text-black transition">
+        Delete Blog
+      </button>
+    </div>
+  </form>
+
+    <div class="posts mt-20">
+        <h3 class="text-zinc-600">Your Posts</h3>
+        <div class="postContainer mt-5">
+            <div class="post w-1/3 p-5 border-2 border-zinc-800">
+                <h4 class="text-blue-600">@fahamKhan</h4>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta repellat, ullam accusamus accusantium similique sit omnis quidem incidunt ratione repellendus.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

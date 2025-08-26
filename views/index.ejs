@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Blog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Font similar to Figma look -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <nav class="bg-white border-b shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+      <div class="flex justify-between h-16 items-center">
+
+        <!-- Left Side -->
+        <div class="flex items-center space-x-8 text-[15px] font-medium text-gray-700">
+          <!-- Home -->
+          <a href="/" class="flex items-center hover:text-blue-600 transition">
+            <i class="fas fa-home mr-2"></i> Home
+          </a>
+
+          <!-- Categories Dropdown -->
+          <div class="relative group">
+            <button class="flex items-center hover:text-blue-600 transition focus:outline-none">
+              Categories <i class="fas fa-chevron-down ml-2 text-xs"></i>
+            </button>
+            <!-- Dropdown -->
+            <div class="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg hidden group-hover:block">
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Science</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Health & Care</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Astronomy</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">IT</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Maths</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">History</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Politics</a>
+            </div>
+          </div>
+
+          <!-- Post -->
+          <a href="/post" class="hover:text-blue-600 transition">Post</a>
+        </div>
+
+        <!-- Right Side -->
+        <div class="flex space-x-4 text-[15px] font-medium">
+          <a href="/register" class="px-4 py-2 bg-black text-white rounded-lg hover:bg-zinc-600 transition">
+            Register
+          </a>
+          <a href="/login" class="px-4 py-2 border border-black text-black rounded-lg hover:bg-zinc-800 hover:text-white transition">
+            Login
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+    <section class="max-w-7xl mx-auto px-6 py-12">
+
+      <!-- Flash Messages -->
+    <% if (success_msg && success_msg.length > 0) { %>
+      <div class="mb-6 p-4 bg-green-100 text-green-800 rounded-lg shadow">
+        <%= success_msg %>
+      </div>
+    <% } %>
+
+    <% if (error_msg && error_msg.length > 0) { %>
+      <div class="mb-6 p-4 bg-red-100 text-red-800 rounded-lg shadow">
+        <%= error_msg %>
+      </div>
+    <% } %>
+
+    <!-- Heading -->
+    <div class="mb-8">
+        <h2 class="text-3xl font-bold text-gray-800">TECH BLOG</h2>
+        <p class="text-gray-600 text-sm mt-1">Latest insights and articles</p>
+    </div>
+
+    <!-- Blog Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        
+        <!-- Blog Card 1 -->
+        <div class="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-lg transition">
+        <img src="/cpu1.jpg" alt="CPUs" class="w-full h-40 object-cover">
+        <div class="p-4">
+            <h3 class="font-semibold text-lg text-gray-800">CPU</h3>
+                <a href="/blog1" class="text-sm text-gray-600 mt-1 hover:underline mt-1 inline-block">
+                Read this Blog →
+                </a>
+        </div>
+        </div>
+
+        <!-- Blog Card 2 -->
+        <div class="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-lg transition">
+        <img src="/dataCenter.jpg" alt="CPUs" class="w-full h-40 object-cover">
+        <div class="p-4">
+            <h3 class="font-semibold text-lg text-gray-800">data Center</h3>
+                <a href="/blog2" class="text-sm text-gray-600 mt-1 hover:underline mt-1 inline-block">
+                Read this Blog →
+                </a>
+        </div>
+        </div>
+
+        <!-- Blog Card 3 -->
+        <div class="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-lg transition">
+        <img src="/Liquid-cooledS.jpg" alt="Blog 3" class="w-full h-40 object-cover">
+        <div class="p-4">
+            <h3 class="font-semibold text-lg text-gray-800">Liquid-cooled servers</h3>
+            <a href="/blog2" class="text-sm text-gray-600 mt-1 hover:underline mt-1 inline-block">
+                Read this Blog →
+            </a>
+        </div>
+        </div>
+
+
+    </div>
+    </section>
+</body>
+</html>
