@@ -1,87 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= user.username %>'s Blogs</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title><%= user.username %>'s Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
-    <nav class="bg-white border-b shadow-sm">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
-      <div class="flex justify-between h-16 items-center">
-        <!-- Left side -->
-        <div class="flex items-center space-x-8 text-[15px] font-medium text-gray-700">
-          <a href="/" class="flex items-center hover:text-blue-600 transition">
-            <i class="fas fa-home mr-2"></i> Home
-          </a>
-          <div class="relative group">
-            <button class="flex items-center hover:text-blue-600 transition">
-              Categories <i class="fas fa-chevron-down ml-2 text-xs"></i>
-            </button>
-            <div class="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg hidden group-hover:block">
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Science</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Health & Care</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Astronomy</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100">IT</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Maths</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100">History</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Politics</a>
+<body class="bg-gray-50">
+
+    <nav class="bg-white border-b shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Left side -->
+                <div class="flex items-center space-x-8 text-[15px] font-medium text-gray-700">
+                    <a href="/" class="flex items-center hover:text-blue-600 transition">
+                        <i class="fas fa-home mr-2"></i> Home
+                    </a>
+                    <div class="relative group">
+                        <button class="flex items-center hover:text-blue-600 transition">
+                            Categories <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg hidden group-hover:block">
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Science</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Health & Care</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Astronomy</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">IT</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Maths</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">History</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Politics</a>
+                        </div>
+                    </div>
+                    <% if (user) { %>
+                        <a href="/post/<%= user.username %>" class="hover:text-blue-600 transition">Post</a>
+                    <% } else { %>
+                        <a href="/login" class="hover:text-blue-600 transition">Post</a>
+                    <% } %>
+                </div>
+                <!-- Right side -->
+                <div class="flex space-x-4 text-[15px] font-medium">
+                    <% if (user) { %>
+                        <a href="/blogs/<%= user.username %>" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            My Blogs
+                        </a>
+                        <a href="/logout" class="px-4 py-2 border border-black text-black rounded-lg hover:bg-zinc-800 hover:text-white transition">
+                            Logout
+                        </a>
+                    <% } else { %>
+                        <a href="/register" class="px-4 py-2 bg-black text-white rounded-lg hover:bg-zinc-600 transition">
+                            Register
+                        </a>
+                        <a href="/login" class="px-4 py-2 border border-black text-black rounded-lg hover:bg-zinc-800 hover:text-white transition">
+                            Login
+                        </a>
+                    <% } %>
+                </div>
             </div>
-          </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto p-6">
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-3xl font-bold text-gray-900"><%= user.username.toUpperCase() %>'s Profile</h1>
+            <a href="/post/<%= user.username %>" class="px-4 py-2 bg-blue-600 text-white rounded-xl shadow-md hover:bg-blue-700 transition-all">+ New Blog</a>
         </div>
 
-        <!-- Right side -->
-        <div class="flex space-x-4 text-[15px] font-medium">
-          <a href="/register" class="px-4 py-2 bg-black text-white rounded-lg hover:bg-zinc-600 transition">
-            Register
-          </a>
-          <a href="/logout" class="px-4 py-2 border border-black-500 text-black-500 rounded-lg hover:bg-zinc-800 hover:text-white transition">
-            Logout
-          </a>
-        </div>
-      </div>
-    </div>
-  </nav>
+        <div class="space-y-6">
+            <% if (posts.length > 0) { %>
+                <% posts.forEach(post => { %>
+                    <div class="bg-white p-6 rounded-xl shadow flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 sm:space-x-6 transition-all transform hover:-translate-y-1 hover:shadow-lg">
+                        <!-- Left side: Title and Read More link -->
+                        <div class="flex-1">
+                            <h2 class="text-xl font-semibold text-gray-800 mb-2"><%= post.title %></h2>
+                            <a href="/blogs/<%= post._id %>" class="text-blue-600 hover:underline text-sm font-medium transition-colors">
+                                Read more &rarr;
+                            </a>
+                        </div>
 
-  <div class="max-w-6xl mx-auto p-6">
-    <div class="flex items-center justify-between mb-6">
-      <h1 class="text-3xl font-bold"><%= user.username.toUpperCase() %>'s Blog</h1>
-      <div class="flex items-center space-x-3">
-        <span class="text-sm text-gray-500">Logged in as</span>
-        <span class="px-3 py-1 bg-gray-900 text-white rounded-full text-sm"><%= user.username %></span>
-      </div>
-    </div>
-    <!-- Search + CTA -->
-    <div class="flex items-center justify-between mb-6">
-      <input type="text" placeholder="Search..." class="w-1/2 border rounded-xl p-2 focus:ring-black focus:border-black">
-      <a href="/post/<%= user.username %>" class="px-4 py-2 bg-black text-white rounded-xl">+ New Blog</a>
-    </div>
-
-    <div class="grid grid-cols-3 gap-6">
-      <!-- Main column -->
-      <div class="col-span-2 space-y-6">
-        <% if (!posts.length) { %>
-          <div class="bg-white p-6 rounded-xl shadow text-gray-500">No posts yet. Create your first blog!</div>
-        <% } %>
-        <% posts.forEach(post => { %>
-          <div class="bg-white p-6 rounded-xl shadow">
-            <h2 class="text-2xl font-semibold mb-2"><%= post.title %></h2>
-            <p class="text-gray-700 mb-3"><%= post.content1 %></p>
-            <% if (post.content2) { %>
-              <p class="text-gray-700 mb-3"><%= post.content2 %></p>
+                        <!-- Right side: One image -->
+                        <div class="flex-shrink-0">
+                            <% if (post.pic1) { %>
+                                <img src="/uploads/<%= post.pic1 %>" class="w-40 h-28 object-cover rounded-lg shadow-sm">
+                            <% } else if (post.pic2) { %>
+                                <img src="/uploads/<%= post.pic2 %>" class="w-40 h-28 object-cover rounded-lg shadow-sm">
+                            <% } else { %>
+                                <div class="w-40 h-28 flex items-center justify-center text-gray-400 border border-dashed rounded-lg bg-gray-50 text-sm">
+                                    No Image
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <div class="bg-white p-6 rounded-xl shadow text-center text-gray-500">
+                    <p>You haven't created any blogs yet. Click the "New Blog" button to get started!</p>
+                </div>
             <% } %>
-            <div class="flex gap-4">
-              <% if (post.pic1) { %>
-                <img src="/uploads/<%= post.pic1 %>" class="w-40 h-28 object-cover rounded-lg">
-              <% } %>
-              <% if (post.pic2) { %>
-                <img src="/uploads/<%= post.pic2 %>" class="w-40 h-28 object-cover rounded-lg">
-              <% } %>
-            </div>
-          </div>
-        <% }) %>
-      </div>
+        </div>
     </div>
-  </div>
 </body>
 </html>

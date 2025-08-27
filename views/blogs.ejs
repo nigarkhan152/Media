@@ -47,8 +47,8 @@
                 <!-- Right side -->
                 <div class="flex space-x-4 text-[15px] font-medium">
                     <% if (user) { %>
-                        <a href="/blogs/<%= user.username %>" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                            My Blogs
+                        <a href="/profile/<%= user.username %>" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            Profile
                         </a>
                         <a href="/logout" class="px-4 py-2 border border-black text-black rounded-lg hover:bg-zinc-800 hover:text-white transition">
                             Logout
@@ -69,10 +69,10 @@
     <div class="max-w-6xl mx-auto p-6">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
             <h1 class="text-3xl font-bold text-gray-900 mb-2 md:mb-0"><%= user.username.toUpperCase() %>'s Blog</h1>
-            <div class="flex items-center space-x-3">
+            <!-- <div class="flex items-center space-x-3">
                 <span class="text-sm text-gray-500">Logged in as</span>
                 <span class="px-3 py-1 bg-gray-900 text-white rounded-full text-sm font-semibold"><%= user.username %></span>
-            </div>
+            </div> -->
         </div>
         
         <!-- Search + CTA -->

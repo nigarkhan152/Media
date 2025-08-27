@@ -192,4 +192,36 @@ app.get('/blogs/:username', isLoggedIn, async(req, res) => {
     let posts = await postModel.find({ user: user._id }).populate('user');
     res.render("blogs.ejs", { user, posts });
 })
+// step 30 creating profile route
+app.get('/profile/:username', isLoggedIn,async(req,res)=>{
+    try{
+        let user = await userModel.findOne({username:req.params.username}).populate('posts');
+        if(!user){
+            req.flash("error_msg","User not found");
+            return res.redirect("/");
+        }
+        res.render("profile.ejs",{
+            user: user,
+            posts: user.posts
+        });
+    }catch(err){
+        console.log(err);
+        req.flash("error_msg","An error occurred");
+        res.redirect("/");
+    }
+})
+app.get("/blogs/:id",isLoggedIn,async(req,res)=>{
+    try{
+        let post = await postModel.findById(req.params.id).populate("user");
+        if(!post){
+            req.flash("error_msg","Post not found");
+            return res.redirect("/");
+        }
+        res.render("singlePost.ejs",{post})
+    }catch(err){
+        console.log(err);
+        req.flash("error_msg","An error occurred");
+        res.redirect("/");
+    }
+})
 app.listen(3000);
