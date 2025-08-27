@@ -16,6 +16,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 // step 24 multer setup
 const multer = require('multer');
+const user = require('./models/user');
 
 app.use(session({
     secret: "faham123",
@@ -39,8 +40,24 @@ app.use(express.static(path.join(__dirname, "assets")));
 // step 3 use cookieParser
 app.use(cookieParser());
 // step 1 setting cookies
+app.use(async(req,res,next)=>{
+    if(req.cookies.token){
+        try{
+            const data = jwt.verify(req.cookies.token,"faham123");
+            const user = await userModel.findById(data._id).populate('posts');
+            req.user = user;
+        }catch(err){
+            res.clearCookie("token");
+            req.user = null;
+        }
+    }else{
+        res.user = null;
+    }
+    next();
+})
+
 app.get('/',(req,res)=>{
-    res.render("index.ejs");
+    res.render("index.ejs",{user: req.user});
 })
 //step 5 kuch nhi
 // step 9 creating register route
@@ -70,9 +87,9 @@ app.post('/login',async function(req,res){
         // step 18 checking password
         let isMatch = await bcrypt.compare(req.body.password,user.password);
         if(isMatch){
-            let token = jwt.sign({email:req.body.email},"faham123");
+            let token = jwt.sign({_id: user._id, username: user.username,email:req.body.email},"faham123");
             res.cookie("token",token);
-            res.redirect("/post");
+            res.redirect(`/post/${user.username}`);
         }
         else{
             res.send("something went wrong");
@@ -87,8 +104,8 @@ app.get('/logout',(req,res)=>{
 })
 
 //step 10 get register route
-app.get('/register',(req,res)=>{
-    res.render("register.ejs")
+app.get('/register',async (req,res)=>{
+    res.render("register.ejs");
 })
 
 // step 15 get login route
@@ -97,9 +114,17 @@ app.get('/login',(req,res)=>{
 })
 // step 19 creating post route
 // step 21 protecting post route using loggedin function
-app.get('/post',isLoggedIn,(req,res)=>{
-    res.render("post.ejs")
-})
+
+// app.get('/post/:username',isLoggedIn,(req,res)=>{
+//     res.render("post.ejs")
+// })
+app.get("/post/:username", isLoggedIn, async (req, res) => {
+    let user = await userModel.findOne({ username: req.params.username });
+    if (!user) return res.status(404).send("User not found");
+
+    res.render("post.ejs", { user });
+});
+
 // step 25 multer configuration
 const storage = multer.diskStorage({
     destination: function(req,file,cb){
@@ -139,9 +164,18 @@ app.post('/post',isLoggedIn,upload.fields([{name:'pic1'},{name:'pic2'}]),async(r
         pic1: req.files.pic1 ? req.files.pic1[0].filename : null,
         pic2: req.files.pic2 ? req.files.pic2[0].filename : null
     });
+    await userModel.findByIdAndUpdate(
+        req.user._id,
+        { $push: { posts: newPost._id } }
+      );
+
     req.flash("success_msg","Post created successfully!");
-    res.redirect("/post");
+    res.redirect(`/blogs/${req.user.username}`);
 })
-
-
+// step 28 creating blog route to see all posts
+app.get('/blogs/:username',isLoggedIn,async(req,res)=>{
+    let user = await userModel.findOne({username:req.params.username});
+    let posts = await postModel.find({user: user._id}).populate('user');
+    res.render("blogs.ejs",{user,posts});
+})
 app.listen(3000); 
